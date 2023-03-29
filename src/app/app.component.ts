@@ -1,5 +1,7 @@
+import { Component, ViewChild, ViewContainerRef, ComponentRef } from '@angular/core';
 import { UsersService } from './service/users.service';
-import { Component } from '@angular/core';
+import { GroupNameService } from './service/group-name.service';
+import { PopUpComponent } from './pop-up/pop-up.component';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +9,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(public users: UsersService) {}
+  constructor(
+    public users: UsersService,
+    public groupName: GroupNameService,
+  ) {}
 
-  updateUser(info: {name: string, status: string}, user: {name: string, status: string, url: string, id: number}) {
+  @ViewChild('popUp', { read: ViewContainerRef })
+  private viewRef!: ViewContainerRef;
+
+  private componentRef!: ComponentRef<PopUpComponent>;
+
+  updateUser(info: { name: string; status: string }, user: { name: string; status: string; url: string; id: number }) {
     user.name = info.name;
     user.status = info.status;
+  }
+
+  showPopUp() {
+    this.componentRef = this.viewRef.createComponent(PopUpComponent);
+    this.componentRef.instance.groupName = this.groupName.getCurrentGroupName();
+    this.componentRef.instance.members = this.users.developers.length;
+    this.componentRef.instance.close.subscribe(() => {
+      this.viewRef.clear();
+    });
   }
 }

@@ -10,5 +10,7 @@
         [img]="user.url"
         (update)="updateUser($event, user)"
         ></app-user>
+        <button (click)="showPopUp()">Show details</button>
     </main>
+    <ng-template #popUp></ng-template>
 </div>
