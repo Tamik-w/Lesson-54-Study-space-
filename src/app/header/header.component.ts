@@ -7,10 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   groupName = 'Healthy lifestyle';
-  newGroupName: string = '';
 
-  editGroupName() {
-    this.groupName = this.newGroupName;
-    this.newGroupName = '';
+  editGroupName(newName: string) {
+    this.groupName = newName;
   }
 }
