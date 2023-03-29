@@ -7,15 +7,15 @@
             <div class="user-data-item">
                 <h2>{{name}}</h2>
                 <div class="edit-body">
-                    <input type="text" placeholder="Write new name">
-                    <button class="network">Edit</button>
+                    <input type="text" #nameInput [value]="name" placeholder="Write new name">
+                    <button (click)="updateInfo(nameInput.value, statusInput.value)" class="network">Edit</button>
                 </div>
             </div>
             <div class="user-data-item">
                 <div class="status-text">{{status}}</div>
                 <div class="edit-body">
-                    <input type="text" placeholder="Write new status">
-                    <button class="network">Edit</button>
+                    <input type="text" #statusInput [value]="status" placeholder="Write new status">
+                    <button (click)="updateInfo(nameInput.value, statusInput.value)" class="network">Edit</button>
                 </div>
             </div>
         </div>
